@@ -1,15 +1,15 @@
 jenkins:
   systemMessage: "Welcome to Jenkins!"
-    mode: NORMAL
+  mode: NORMAL
   remotingSecurity:
     enabled: true
   securityRealm:
     local:
       allowsSignup: false
       users:
-        - id: badreddine
-          name: badreddine
-          password: ${USER_BADREDDINE_PASSWORD}
+        - id: "badreddine"
+          name: "badreddine"
+          password: "${USER_BADREDDINE_PASSWORD}"
 
   authorizationStrategy:
     roleBased:
@@ -27,16 +27,26 @@ jenkinsUrl: "http://localhost:8080/"
 jenkinsAdminEmail: "badreddineqassimi@gmail.com"
 
 plugins:
-  - Configuration as Code
-  - Job DSL
+  - configuration-as-code
+  - job-dsl
 
-jobs:
-  - script: |
-      steps {
-        shell('df')
-      }
-      steps{
-        shell('echo "Hello dear $NAME!"
-                date
-                echo "This is your DDoS number $BUILD_NUMBER."')
-      }
+unclassified:
+  jobs:
+    - script: |
+        pipeline {
+          agent any
+          stages {
+            stage('Print Disk Usage') {
+              steps {
+                sh 'df -h'
+              }
+            }
+            stage('Print Build Info') {
+              steps {
+                sh 'echo "Hello dear $NAME!"'
+                sh 'date'
+                sh 'echo "This is your DDoS number $BUILD_NUMBER."'
+              }
+            }
+          }
+        }
