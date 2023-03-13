@@ -1,17 +1,26 @@
-enkins:
+jenkins:
   systemMessage: "Welcome to Jenkins!"
+    mode: NORMAL
+  remotingSecurity:
+    enabled: true
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: badreddine
+          name: badreddine
+          password: ${USER_BADREDDINE_PASSWORD}
 
-securityRealm:
-  local:
-    allowsSignup: false
-    users:
-      - id: "badreddine"
-        name: "badreddine"
-        password: "Pedro01%%"
-
-authorizationStrategy:
-  loggedInUsersCanDoAnything:
-    allowAnonymousRead: false
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "badreddine"
+            description: "Marvin master"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "badreddine"
 
 # Change this URL to match your Jenkins URL
 jenkinsUrl: "http://localhost:8080/"
@@ -24,13 +33,13 @@ plugins:
   - Configuration as Code
   - Job DSL
 
-  jobs:
-    - script: |
-        steps {
-          shell('df')
-        }
-        steps{
-          shell('echo "Hello dear $NAME!"
-                  date
-                  echo "This is your DDoS number $BUILD_NUMBER."')
-        }
+jobs:
+  - script: |
+      steps {
+        shell('df')
+      }
+      steps{
+        shell('echo "Hello dear $NAME!"
+                date
+                echo "This is your DDoS number $BUILD_NUMBER."')
+      }
