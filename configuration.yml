@@ -150,10 +150,4 @@ tool:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
   jobs:
-    - script: |
-        def jobConfig = file('my-job.groovy')
-        job('my-job') {
-          configure {
-            it / 'definition' << jobConfig
-          }
-        }
+    - file: ./job_dsl.groovy
