@@ -57,4 +57,10 @@ tool:
     globalSettingsProvider: "standard"
     settingsProvider: "standard"
   jobs:
-    - file: "job_dsl.groovy"
+    - script: |
+        def jobConfig = file('my-job.groovy').text
+        job('my-job') {
+          configure {
+            it / 'definition' << jobConfig
+          }
+        }
