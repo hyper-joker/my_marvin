@@ -22,13 +22,10 @@ jenkins:
             assignments:
               - "badreddine"
 
-# Change this URL to match your Jenkins URL
 jenkinsUrl: "http://localhost:8080/"
 
-# Change this to match the email address for the Jenkins administrator
 jenkinsAdminEmail: "badreddineqassimi@gmail.com"
 
-# Change this to match the plugins you want to install
 plugins:
   - Configuration as Code
   - Job DSL
