@@ -76,8 +76,9 @@ jenkins:
 
 jenkinsUrl: "http://localhost:8080/"
 
-jobs:
-  - script: >
+unclassified:
+  jobs:
+    - script: >
         folder('Tools') {
           description('Folder for miscellaneous tools.')
           displayName('Tools')
