@@ -35,6 +35,12 @@ jenkins:
             permissions:
               - "Overall/Administer"
             assignments:
+              - "badreddine"
+          - name: "admin"
+            description: "Marvin master"
+            permissions:
+              - "Overall/Administer"
+            assignments:
               - "chocolateen"
           - name: "ape"
             description: "Pedagogical team member"
