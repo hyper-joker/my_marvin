@@ -10,6 +10,9 @@ jenkins:
         - id: "badreddine"
           name: "badreddine"
           password: "${USER_BADREDDINE_PASSWORD}"
+        - id: "jigglypuff"
+          name: "jigglypuff"
+          password: "${USER_JIGGLYPUFF_PASSWORD}"
 
   authorizationStrategy:
     roleBased:
@@ -21,6 +24,12 @@ jenkins:
               - "Overall/Administer"
             assignments:
               - "badreddine"
+          - name: "jigglypuff"
+            description: "Marvin slave"
+            permissions:
+              - "Overall/Read"
+            assignments:
+              - "jigglypuff"
 
 jenkinsUrl: "http://localhost:8080/"
 
