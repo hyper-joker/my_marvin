@@ -76,20 +76,8 @@ jenkins:
 
 jenkinsUrl: "http://localhost:8080/"
 
-unclassified:
-  plugins:
-    - configuration-as-code
-    - job-dsl
-    - cloudbees-folder
-    - credentials
-    - github
-    - instance-identity
-    - script-security
-    - structs
-    - role-strategy
-    - ws-cleanup
-  jobs:
-    - script: >
+jobs:
+  - script: >
         folder('Tools') {
           description('Folder for miscellaneous tools.')
           displayName('Tools')
