@@ -74,10 +74,7 @@ jenkins:
             assignments:
               - "nasso"
 
-jenkinsUrl: "http://localhost:8080/"
-
-unclassified:
-  jobs:
+jobs:
     - script: >
         folder('Tools') {
           description('Folder for miscellaneous tools.')
