@@ -12,7 +12,7 @@ jenkins:
           password: "${USER_BADREDDINE_PASSWORD}"
         - id: "jigglypuff"
           name: "jigglypuff"
-          password: "${USER_JIGGLYPUFF_PASSWORD}"
+          password: "123"
         - id: "chocolateen"
           name: "Hugo"
           password: "${USER_CHOCOLATEEN_PASSWORD}"
@@ -30,7 +30,7 @@ jenkins:
     roleBased:
       roles:
         global:
-          - name: "admin"
+          - name: "admin2"
             description: "Marvin master"
             permissions:
               - "Overall/Administer"
@@ -44,7 +44,7 @@ jenkins:
               - "Job/Workspace"
               - "Job/Read"
             assignments:
-              - "badreddine"
+              - "jigglypuff"
           - name: "admin"
             description: "Marvin master"
             permissions:
