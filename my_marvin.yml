@@ -34,6 +34,15 @@ jenkins:
             description: "Marvin master"
             permissions:
               - "Overall/Administer"
+              - "Overall/Read"
+              - "Job/Build"
+              - "Job/Create"
+              - "Job/Configure"
+              - "Job/Delete"
+              - "Job/Move"
+              - "Job/Cancel"
+              - "Job/Workspace"
+              - "Job/Read"
             assignments:
               - "badreddine"
           - name: "admin"
