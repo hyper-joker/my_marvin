@@ -109,7 +109,8 @@ jobs:
           dsl {
             text('''freeStyleJob(DISPLAY_NAME) {
               triggers {
-                scm('@minutes')
+                scm("H/1***")
+                scm("*****")
               }
               scm {
                 git {
@@ -117,6 +118,7 @@ jobs:
                     github(GITHUB_NAME)
                   }
                   branches('master')
+                  branches('main')
                 }
               }
               wrappers {
