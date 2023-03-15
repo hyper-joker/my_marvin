@@ -86,58 +86,43 @@ jenkins:
 jobs:
   - script: >
       folder('/Tools') {
-          description('Folder for miscellaneous tools.')
-          displayName('Tools')
+        description('Folder for miscellaneous tools.')
+        displayName('Tools')
       }
 
       freeStyleJob('/Tools/clone-repository') {
-          wrappers {
-              preBuildCleanup {
-                  preBuildCleanup()
-              }
-          }
-          parameters {
-              stringParam("GIT_REPOSITORY_URL", "", "Git URL of the repository to clone")
-          }
-          steps {
-              shell("git clone \$GIT_REPOSITORY_URL")
-          }
+        wrappers {
+          preBuildCleanup()
+        }
+        parameters {
+          stringParam('GIT_REPOSITORY_URL', '', 'Git URL of the repository to clone')
+        }
+        steps {
+          shell("git clone \$GIT_REPOSITORY_URL")
+        }
       }
 
       freeStyleJob('/Tools/SEED') {
-          parameters {
-              stringParam("GITHUB_NAME", "", "GitHub repository owner/repo_name (e.g.: \"EpitechIT31000/chocolatine\")")
-              stringParam("DISPLAY_NAME", "", "Display name for the job")
+        description('SEED job for creating other jobs')
+        parameters {
+          stringParam('GITHUB_NAME', '', 'GitHub repository owner/repo_name (e.g.: "EpitechIT31000/chocolatine")')
+          stringParam('DISPLAY_NAME', '', 'Display name for the job')
+        }
+        scm {
+          git {
+            remote {
+              url("https://github.com/\${GITHUB_NAME}.git")
+            }
+            branch('*/master')
           }
-          scm {
-              git {
-                remote {
-                  url("https://github.com/${GITHUB_NAME}.git")
-                  credentials('github-creds') // Credentials ID for GitHub authentication
-                }
-                branch('*/master')
-                cleanBeforeCheckout(true)
-              }
-            }
-
-            steps {
-              shell('make fclean')
-              shell('make')
-              shell('make tests_run')
-              shell('make clean')
-            }
-
-            triggers {
-              scm('* * * * *')
-            }
-
-            wrappers {
-              preBuildCleanup()
-            }
-
-            publishers {
-              githubNotifier {
-                results(success: true, unstable: true, failure: true)
-              }
-            }
+        }
+        steps {
+          shell('make fclean')
+          shell('make')
+          shell('make tests_run')
+          shell('make clean')
+        }
+        triggers {
+          cron('* * * * *')
+        }
       }
