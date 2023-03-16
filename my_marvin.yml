@@ -130,14 +130,25 @@ jobs:
                               }
                           }
       triggers {
-          cron("H/1***")
-      }
-                      steps {
-                          shell("make fclean")
-                          shell("make")
-                          shell("make test")
-                          shell("make clean")
-                      }
+                    cron('H/1 * * * *')
+                }
+
+                stages {
+                    stage('Build') {
+                        steps {
+                            script {
+                                def changes = scm.pollChanges()
+                                if (changes) {
+                                    sh 'make clean'
+                                    sh 'make'
+                                    sh 'make test'
+                                } else {
+                                    echo 'No changes detected, skipping build.'
+                                }
+                            }
+                        }
+                    }
+                }
                   }'''.stripIndent())
               }
           }
