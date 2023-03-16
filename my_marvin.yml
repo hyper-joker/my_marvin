@@ -120,10 +120,6 @@ jobs:
                               preBuildCleanup()
                           }
                       }
-                      triggers {
-                          scm("H/1***")
-                          scm("*****")
-                      }
                       scm {
                           git {
                               remote {
@@ -133,6 +129,9 @@ jobs:
                                   branches("main")
                               }
                           }
+      triggers {
+          cron("H/1***")
+      }
                       steps {
                           shell("make fclean")
                           shell("make")
